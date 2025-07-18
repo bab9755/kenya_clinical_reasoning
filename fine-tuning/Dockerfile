@@ -5,13 +5,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /requirements.txt
+COPY train.csv /train.csv
 
 RUN pip3 install -r requirements.txt --no-cache-dir
 
 COPY finetune.py /finetune.py
-
-# Copy train.csv into the image
-COPY train.csv /train.csv
 
 ENV PYTHONUNBUFFERED 1
 

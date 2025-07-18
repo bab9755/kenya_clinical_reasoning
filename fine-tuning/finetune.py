@@ -107,7 +107,7 @@ trainer = SFTTrainer(
 )
 
 trainer.train()
-trainer.model.save_pretrained(os.getenv("NEW_MODEL", ""))
+trainer.model.save_pretrained(os.getenv("NEW_MODEL", "clinical_reasoning_model"))
 
 ################################# Save ########################################
 
@@ -119,7 +119,7 @@ base_model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.float16,
     device_map={"": torch.cuda.current_device()},
 )
-model = PeftModel.from_pretrained(base_model, os.getenv("NEW_MODEL", "gemma-emoji"))
+model = PeftModel.from_pretrained(base_model, os.getenv("NEW_MODEL", "clinical_reasoning_model"))
 model = model.merge_and_unload()
 
 # push results to Cloud Storage
